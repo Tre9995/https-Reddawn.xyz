@@ -1,10 +1,8 @@
 {
   "id": "com.reddawn.streaming",
-  "version": "1.0.0",
-  "name": "Reddawn - Premium Streaming",
-  "description": "High-quality streaming addon with advanced filtering. Optimized for 4K HDR content, Atmos audio, and cached streams.",
-  "logo": "https://raw.githubusercontent.com/Tre9995/https-Reddawn.xyz/main/logo.png",
-  "background": "https://raw.githubusercontent.com/Tre9995/https-Reddawn.xyz/main/background.png",
+  "version": "1.1.0",
+  "name": "Reddawn - Premium Streaming (Free + Premium)",
+  "description": "Multi-source streaming addon. Free torrents + Premium Debrid/Usenet. 4K HDR, Atmos audio, advanced filtering.",
   "types": [
     "movie",
     "series"
@@ -23,16 +21,7 @@
     }
   ],
   "behaviorHints": {
-    "configurable": true,
+    "configurable": false,
     "configurationRequired": false
-  },
-  "config": [
-    {
-      "key": "sources",
-      "type": "text",
-      "title": "Configuration (Optional)",
-      "description": "Advanced users can paste custom configuration here",
-      "default": ""
-    }
-  ]
+  }
 }
