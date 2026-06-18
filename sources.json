@@ -1,11 +1,11 @@
 {
   "metadata": {
     "id": "main-(dave's-streaming-setup)-2026-05-27.17-44-18-tqr0les",
-    "name": "MAIN (Dave's Streaming Setup)",
-    "description": "Main everyday addon.\nUse this for:\noriginal language\nbest quality\nhighest bitrate\nHDR/DV\nAtmos/TrueHD/DTS-HD\ncached streams",
+    "name": "MAIN (Dave's Streaming Setup) - FREE + PREMIUM",
+    "description": "Multi-source streaming addon.\nUse this for:\nfree torrents + premium debrid\noriginal language\nbest quality\nhighest bitrate\nHDR/DV\nAtmos/TrueHD/DTS-HD\ncached & uncached streams",
     "source": "external",
-    "author": "Dave",
-    "version": "1.0.0",
+    "author": "Dave + Reddawn",
+    "version": "1.1.0",
     "category": "Debrid",
     "serviceRequired": false,
     "setToSaveInstallMenu": true
@@ -15,7 +15,7 @@
     "showChanges": false,
     "addonName": "AIOStreams",
     "addonLogo": "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/logo/aios.png",
-    "addonDescription": "Custom AIOStreams powered by Tamtaro SEL Setup v2.6.1. Features advanced filtering with Stream Expression Language and smart sorting with Vidhin's Regex Patterns. Your personal all-in-one setup for the perfect Stremio experience.",
+    "addonDescription": "Custom AIOStreams powered by Tamtaro SEL Setup v2.6.1. Features advanced filtering with Stream Expression Language and smart sorting with Vidhin's Regex Patterns. Your persona...",
     "appliedTemplates": [
       {
         "id": "tamtaro.complete",
@@ -123,7 +123,9 @@
     "requiredStreamTypes": [],
     "preferredStreamTypes": [
       "debrid",
-      "usenet"
+      "usenet",
+      "p2p",
+      "http"
     ],
     "excludedEncodes": [],
     "includedEncodes": [],
@@ -170,10 +172,10 @@
       "Full Screen",
       "Extended",
       "Extended Cut",
-      "Director’s cut",
+      "Director's cut",
       "Special Edition",
       "Ultimate edition",
-      "Collector’s edition",
+      "Collector's edition",
       "Unrated",
       "Roadshow",
       "Redux",
@@ -209,7 +211,7 @@
     "excludeCachedFromAddons": [],
     "excludeCachedFromServices": [],
     "excludeCachedFromStreamTypes": [],
-    "excludeUncached": true,
+    "excludeUncached": false,
     "excludeUncachedFromAddons": [],
     "excludeUncachedFromServices": [],
     "excludeUncachedFromStreamTypes": [],
@@ -224,28 +226,28 @@
         "enabled": true
       },
       {
-        "expression": "/*Bad 4k Anime*/ (isAnime and originalLanguage == 'Japanese' and count(quality(resolution(cached(streams), '2160p'), 'Bluray REMUX')) == 0 and count(seadex(resolution(streams, '2160p'))) == 0 and count(rseMatched(resolution(streams, '2160p'), 'BD T1', 'BD T2', 'BD T3', 'BD T4', 'BD T5', 'BD T6', 'BD T7', 'BD T8', 'Remux T1', 'Remux T2', 'Remux T3', 'Web T1', 'Web T2', 'Web T3', 'Web T4', 'Web T5', 'Web T6')) == 0 )? negate(merge(library(streams), seadex(streams)), resolution(streams, '2160p')) : []",
+        "expression": "/*Bad 4k Anime*/ (isAnime and originalLanguage == 'Japanese' and count(quality(resolution(cached(streams), '2160p'), 'Bluray REMUX')) == 0 and count(seadex(resolution(streams, '2160p'))) == 0) ? [keyword(streams, '720p', '1080p')]:[]",
         "enabled": true
       },
       {
-        "expression": "/*Upscaled 4k*/(queryType=='movie' or queryType =='series') and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))>=1) and count(quality(resolution(streams,'2160p'),'Bluray REMUX')) == 0 and count(rseMatched(resolution(streams, '2160p'), 'DE Bluray T1', 'DE Bluray T2', 'DE Bluray T3', 'UHD Bluray T1', 'HD Bluray T1', 'UHD Bluray T2', 'HD Bluray T2', 'UHD Bluray T3', 'HD Bluray T3', 'DE Web T1', 'DE Web T2', 'DE Web T3', 'DE Web Scene', 'Web T1', 'Web T2', 'Web T3', 'Web Scene')) == 0? negate(merge(seadex(streams),library(streams)),resolution(streams,'2160p')):[]",
+        "expression": "/*Upscaled 4k*/(queryType=='movie' or queryType =='series') and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))>=1) and count(quality(resolution(streams,'2160p'),'Bluray REMUX'))==0 ? []:[]",
         "enabled": true
       },
       {
-        "expression": "/*Bad 4k Bluray*/(queryType=='movie' or queryType =='series') and count(quality(resolution(streams,'2160p'),'Bluray REMUX')) == 0 and count(rseMatched(resolution(streams, '2160p'), 'DE Bluray T1', 'DE Bluray T2', 'DE Bluray T3', 'UHD Bluray T1', 'HD Bluray T1', 'UHD Bluray T2', 'HD Bluray T2', 'UHD Bluray T3', 'HD Bluray T3')) == 0? negate(merge(seadex(streams),library(streams)),resolution(quality(streams, 'Bluray'),'2160p')):[]",
-        "enabled": true
+        "expression": "/*Bad 4k Bluray*/(queryType=='movie' or queryType =='series') and count(quality(resolution(streams,'2160p'),'Bluray REMUX')) == 0 and count(rseMatched(resolution(streams, '2160p'))) >=1 ? [quality(resolution(streams, '1080p'), 'Bluray REMUX')]:[]",
+        "enabled": false
       },
       {
-        "expression": "/*Bad 1080P Bluray*/(queryType=='movie') and count(quality(resolution(streams,'2160p'),'Bluray REMUX'))==0 and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))==0) and count(rseMatched(resolution(quality(streams, 'Bluray'), '1080p'), 'DE Bluray T1', 'DE Bluray T2', 'DE Bluray T3', 'UHD Bluray T1', 'HD Bluray T1', 'UHD Bluray T2', 'HD Bluray T2', 'UHD Bluray T3', 'HD Bluray T3')) == 0 ? negate(merge(seadex(streams),library(streams)),quality(resolution(streams,'1080p'),'Bluray')):[]",
-        "enabled": true
+        "expression": "/*Bad 1080P Bluray*/(queryType=='movie') and count(quality(resolution(streams,'2160p'),'Bluray REMUX'))==0 and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))==0) and (count(quality(resolution(streams,'1080p'),'WEB')) >=1)? []:[]",
+        "enabled": false
       },
       {
-        "expression": "/*Low SEL Score*/ count(streamExpressionScore(negate(merge(library(streams), seadex(streams)),merge(cached(streams),type(streams,'p2p','http'))),-50))<10?[]:streamExpressionScore(negate(merge(library(streams),seadex(streams)),streams),-1000000,-50)",
-        "enabled": true
+        "expression": "/*Low SEL Score*/ count(streamExpressionScore(negate(merge(library(streams), seadex(streams)),merge(cached(streams),type(streams,'p2p','http'))),-50))<10?[]:streamExpressionScore(streams, -50)",
+        "enabled": false
       },
       {
         "expression": "/*TB Non-Pro Download Limit*/ size(uncached(service(streams, 'torbox')), '200GB')",
-        "enabled": true
+        "enabled": false
       },
       {
         "expression": "<SYNCED: https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-standard.json>",
@@ -255,7 +257,7 @@
     "requiredStreamExpressions": [],
     "preferredStreamExpressions": [
       {
-        "expression": "/*𝙸𝚏 𝚢𝚘𝚞 𝚞𝚜𝚎𝚍 𝙿𝚊𝚛𝚝𝚒𝚊𝚕 𝚃𝚎𝚖𝚙𝚕𝚊𝚝𝚎, 𝚊𝚍𝚍 𝚂𝚝𝚛𝚎𝚊𝚖 𝙴𝚡𝚙𝚛𝚎𝚜𝚜𝚒𝚘𝚗𝚜 𝚒𝚗 𝚂𝚘𝚛𝚝 𝙾𝚛𝚍𝚎𝚛 𝚊𝚏𝚝𝚎𝚛 𝚀𝚞𝚊𝚕𝚒𝚝𝚢 𝚝𝚘 𝚞𝚜𝚎 𝙿𝚂𝙴 𝚜𝚢𝚗𝚌𝚎𝚍 𝚞𝚛𝚕 𝚋𝚎𝚕𝚘𝚠.*/ []",
+        "expression": "/*𝙸𝚏 𝚢𝚘𝚞 𝚞𝚜𝚎𝚍 𝙿𝚊𝚛𝚝𝚒𝚊𝚕 𝚃𝚎𝚖𝚙𝚕𝚊𝚝𝚎, 𝚊𝚍𝚍 𝚂𝚝𝚛𝚎𝚊𝚖 𝙴𝚡𝚙𝚛𝚎𝚜𝚜𝚒𝚘𝚗𝚜 𝚑𝚎𝚛𝚎*/[]",
         "enabled": true
       },
       {
@@ -271,7 +273,7 @@
     ],
     "rankedStreamExpressions": [
       {
-        "expression": "/*#𝚅𝚒𝚍𝚑𝚒𝚗'𝚜 𝚁𝚎𝚐𝚎𝚡𝚎𝚜 — 𝙴𝚗𝚐𝚕𝚒𝚜𝚑 𝚁𝚊𝚗𝚔𝚎𝚍 𝚂𝚝𝚛𝚎𝚊𝚖 𝙴𝚡𝚙𝚛𝚎𝚜𝚜𝚒𝚘𝚗𝚜 (𝚜𝚢𝚗𝚌𝚎𝚍). 𝚄𝚜𝚎𝚍 𝚝𝚘 𝚜𝚌𝚘𝚛𝚎 𝚊𝚗𝚍 𝚝𝚊𝚐 𝚜𝚝𝚛𝚎𝚊𝚖𝚜, 𝚟𝚒𝚜𝚒𝚋𝚕𝚎 𝚒𝚗 𝚏𝚘𝚛𝚖𝚊𝚝𝚝𝚎𝚛.*/ []",
+        "expression": "/*#𝚅𝚒𝚍𝚑𝚒𝚗'𝚜 𝚁𝚎𝚐𝚎𝚡𝚎𝚜 — 𝙴𝚗𝚐𝚕𝚒𝚜𝚑 𝚁𝚊𝚗𝚔𝚎𝚍 𝚂𝚝𝚛𝚎𝚊𝚖 𝙴𝚡𝚙𝚛𝚎𝚜𝚜𝚒𝚘𝚗𝚜*/[]",
         "score": 0,
         "enabled": true
       },
@@ -288,7 +290,7 @@
     ],
     "rankedRegexPatterns": [
       {
-        "pattern": "/^(?!𝚅𝚒𝚍𝚑𝚒𝚗'𝚜 𝙴𝚗𝚐𝚕𝚒𝚜𝚑 𝚁𝚊𝚗𝚔𝚎𝚍 𝚁𝚎𝚐𝚎𝚡𝚎𝚜 (𝚜𝚢𝚗𝚌𝚎𝚍))𝚅𝚒𝚍𝚑𝚒𝚗'𝚜 𝙴𝚗𝚐𝚕𝚒𝚜𝚑 𝚁𝚊𝚗𝚔𝚎𝚍 𝚁𝚎𝚐𝚎𝚡𝚎𝚜 (𝚜𝚢𝚗𝚌𝚎𝚍)$/",
+        "pattern": "/^(?!𝚅𝚒𝚍𝚑𝚒𝚗'𝚜 𝙴𝚗𝚐𝚕𝚒𝚜𝚑 𝚁𝚊𝚗𝚔𝚎𝚍 𝚁𝚎𝚐𝚎𝚡𝚎𝚜 (𝚜𝚢𝚗𝚌𝚎𝚍))𝚅𝚒𝚍𝚑𝚒𝚗'𝚜 𝙴𝚗𝚐𝚕𝚒𝚜𝚑/",
         "name": "𝚅𝚒𝚍𝚑𝚒𝚗'𝚜 𝙴𝚗𝚐𝚕𝚒𝚜𝚑 𝚁𝚊𝚗𝚔𝚎𝚍 𝚁𝚎𝚐𝚎𝚡𝚎𝚜 (𝚜𝚢𝚗𝚌𝚎𝚍)",
         "score": 0
       },
@@ -301,49 +303,35 @@
     "regexOverrides": [],
     "selOverrides": [
       {
-        "expression": "/*Bad 4k Anime*/ (isAnime and originalLanguage == 'Japanese' and count(quality(resolution(cached(streams), '2160p'), 'Bluray REMUX')) == 0 and count(seadex(resolution(streams, '2160p'))) == 0 and count(rseMatched(resolution(streams, '2160p'), 'BD T1', 'BD T2', 'BD T3', 'BD T4', 'BD T5', 'BD T6', 'BD T7', 'BD T8', 'Remux T1', 'Remux T2', 'Remux T3', 'Web T1', 'Web T2', 'Web T3', 'Web T4', 'Web T5', 'Web T6')) == 0 )? negate(merge(library(streams), seadex(streams)), resolution(streams, '2160p')) : []",
+        "expression": "/*Bad 4k Anime*/ (isAnime and originalLanguage == 'Japanese' and count(quality(resolution(cached(streams), '2160p'), 'Bluray REMUX')) == 0 and count(seadex(resolution(streams, '2160p'))) == 0) ? [keyword(streams, '720p', '1080p')]:[]",
         "exprNames": [
           "Bad 4k Anime"
         ],
-        "disabled": true
+        "disabled": false
       },
       {
-        "expression": "/*Upscaled 4k*/(queryType=='movie' or queryType =='series') and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))>=1) and count(quality(resolution(streams,'2160p'),'Bluray REMUX')) == 0 and count(rseMatched(resolution(streams, '2160p'), 'DE Bluray T1', 'DE Bluray T2', 'DE Bluray T3', 'UHD Bluray T1', 'HD Bluray T1', 'UHD Bluray T2', 'HD Bluray T2', 'UHD Bluray T3', 'HD Bluray T3', 'DE Web T1', 'DE Web T2', 'DE Web T3', 'DE Web Scene', 'Web T1', 'Web T2', 'Web T3', 'Web Scene')) == 0? negate(merge(seadex(streams),library(streams)),resolution(streams,'2160p')):[]",
+        "expression": "/*Upscaled 4k*/(queryType=='movie' or queryType =='series') and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))>=1) and count(quality(resolution(streams,'2160p'),'Bluray REMUX'))==0 ? []:[]",
         "exprNames": [
           "Upscaled 4k"
         ],
-        "disabled": true
+        "disabled": false
       },
       {
-        "expression": "/*Bad 4k Bluray*/(queryType=='movie' or queryType =='series') and count(quality(resolution(streams,'2160p'),'Bluray REMUX')) == 0 and count(rseMatched(resolution(streams, '2160p'), 'DE Bluray T1', 'DE Bluray T2', 'DE Bluray T3', 'UHD Bluray T1', 'HD Bluray T1', 'UHD Bluray T2', 'HD Bluray T2', 'UHD Bluray T3', 'HD Bluray T3')) == 0? negate(merge(seadex(streams),library(streams)),resolution(quality(streams, 'Bluray'),'2160p')):[]",
+        "expression": "/*Bad 4k Bluray*/(queryType=='movie' or queryType =='series') and count(quality(resolution(streams,'2160p'),'Bluray REMUX')) == 0 and count(rseMatched(resolution(streams, '2160p'))) >=1 ? [quality(resolution(streams, '1080p'), 'Bluray REMUX')]:[]",
         "exprNames": [
           "Bad 4k Bluray"
         ],
         "disabled": true
       },
       {
-        "expression": "/*Bad 1080P Bluray*/(queryType=='movie') and count(quality(resolution(streams,'2160p'),'Bluray REMUX'))==0 and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))==0) and count(rseMatched(resolution(quality(streams, 'Bluray'), '1080p'), 'DE Bluray T1', 'DE Bluray T2', 'DE Bluray T3', 'UHD Bluray T1', 'HD Bluray T1', 'UHD Bluray T2', 'HD Bluray T2', 'UHD Bluray T3', 'HD Bluray T3')) == 0 ? negate(merge(seadex(streams),library(streams)),quality(resolution(streams,'1080p'),'Bluray')):[]",
+        "expression": "/*Bad 1080P Bluray*/(queryType=='movie') and count(quality(resolution(streams,'2160p'),'Bluray REMUX'))==0 and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))==0) and (count(quality(resolution(streams,'1080p'),'WEB')) >=1)? []:[]",
         "exprNames": [
           "Bad 1080P Bluray"
         ],
         "disabled": true
       },
       {
-        "expression": "/*Bad 1080P Bluray*/(queryType=='movie') and count(quality(resolution(streams,'2160p'),'Bluray REMUX'))==0 and (count(quality(resolution(streams,'1080p'),'Bluray REMUX'))==0) and count(rseMatched(resolution(quality(streams, 'Bluray'), '1080p'), 'DE Bluray T1', 'DE Bluray T2', 'DE Bluray T3', 'UHD Bluray T1', 'HD Bluray T1', 'UHD Bluray T2', 'HD Bluray T2', 'UHD Bluray T3', 'HD Bluray T3')) == 0 ? negate(merge(seadex(streams),library(streams)),quality(resolution(streams,'1080p'),'Bluray')):[]",
-        "exprNames": [
-          "Bad 1080P Bluray"
-        ],
-        "disabled": true
-      },
-      {
-        "expression": "/*RD Copyright (per DMM)*/ service( keyword(streams, 'all', 'web-dl', 'webrip', 'bdrip', 'hdrip', 'dvdrip', 'bluray.x264', 'hdtv.x264', 'hdtv.xvid', 'web.x264', 'web.h264'), 'realdebrid')",
-        "exprNames": [
-          "RD Copyright (per DMM)"
-        ],
-        "disabled": true
-      },
-      {
-        "expression": "/*Low SEL Score*/ count(streamExpressionScore(negate(merge(library(streams), seadex(streams)),merge(cached(streams),type(streams,'p2p','http'))),-50))<10?[]:streamExpressionScore(negate(merge(library(streams),seadex(streams)),streams),-1000000,-50)",
+        "expression": "/*Low SEL Score*/ count(streamExpressionScore(negate(merge(library(streams), seadex(streams)),merge(cached(streams),type(streams,'p2p','http'))),-50))<10?[]:streamExpressionScore(streams, -50)",
         "exprNames": [
           "Low SEL Score"
         ],
@@ -504,10 +492,16 @@
       "id": "custom",
       "definitions": {
         "custom": {
-          "name": "{stream.resolution::exists[\"{stream.resolution::replace('2160p','🔥 4K UHD')::replace('1440p','✨ QHD')::replace('1080p','🚀 Full HD')::replace('720p','💿 HD')::replace('576p','💩 Baja Calidad')::replace('480p','💩 Baja Calidad')::replace('360p','💩 Baja Calidad')::replace('240p','💩 Baja Calidad')::replace('144p','💩 Baja Calidad')}\"||\"💩 Desconocido\"]} • {service.cached::istrue[\"⚡ Instantáneo\"||\"⏳ Espera\"]}{service.shortName::exists[\" • 🛰️ {service.shortName}\"||\"\"]}",
-          "description": "{stream.title::exists[\"🎬 {stream.title::title} \"||\"\"]}{stream.year::exists[\"({stream.year})\"||\"\"]}\n\n{stream.formattedSeasons::exists[\"🍂 {stream.formattedSeasons} \"||\"\"]}{stream.formattedEpisodes::exists[\"🎞️ {stream.formattedEpisodes}\\n\"||\"\\n\"]}{stream.seadexBest::istrue[\"🎚️ Best Release\\n\"||\"\"]}{stream.duration::>0[\"⏱️ {stream.duration::time}\\n\"||\"\"]}\n\n{stream.visualTags::exists[\"✨ Imagen: {stream.visualTags::join(' • ')}\\n\"||\"\"]}{stream.audioTags::exists[\"🎧 Audio: {stream.audioTags::join(' • ')}\\n\"||\"\"]}{stream.audioChannels::exists[\"🔊 Sonido: {stream.audioChannels::join(' • ')}\\n\"||\"\"]}{stream.languageEmojis::exists[\"🌎 Idiomas: {stream.languageEmojis::join(' • ')}\\n\"||\"\"]}{stream.size::exists[\"💾 Tamaño: {stream.size::bytes}\"||\"\"]}\n{stream.bitrate::>0[\"📶 {stream.bitrate::sbitrate}\\n\"||\"\"]}"
+          "name": "{stream.resolution::exists[\"{stream.resolution::replace('2160p','🔥 4K UHD')::replace('1440p','✨ QHD')::replace('1080p','🚀 Full HD')::replace('720p','💿 HD')::replace('576p','📺 SD')}\"]}",
+          "description": "{stream.title::exists[\"🎬 {stream.title::title} \"||\"\"]}{stream.year::exists[\"({stream.year})\"||\"\"]}\n\n{stream.formattedSeasons::exists[\"🍂 {stream.formattedSeasons}\"||\"\"]}"
         },
         "overrides": {
           "torrentio": {
-            "name": "{stream.resolution::exists[\"{stream.resolution::replace('2160p','👑 4K')->replace('1440p','✨ QHD')->replace('1080p','🎬 Full HD')->replace('720p','📺 HD')->replace('576p','📼 SD')->replace('480p','📼 SD')}\"||\"📺 ?\"]} • {service.cached::istrue[\"⚡ Instantáneo\"||\"⏳ Espera\"]}",
-            "description": "{stream.message::exists[\"ℹ️{stream.message}\"||\"\"]}\n{stream.folderName::exists[\"{stream.folderName}\"||\"\"]}\n{stream.filename
+            "name": "{stream.resolution::exists[\"{stream.resolution::replace('2160p','👑 4K')::replace('1440p','✨ QHD')::replace('1080p','🎬 Full HD')::replace('720p','📺 HD')::replace('576p','📺 SD')}\"]}",
+            "description": "{stream.message::exists[\"ℹ️{stream.message}\"||\"\"]}\n{stream.folderName::exists[\"{stream.folderName}\"||\"\"]}"
+          }
+        }
+      }
+    }
+  }
+}
