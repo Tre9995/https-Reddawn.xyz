@@ -1,0 +1,34 @@
+{
+  "id": "xyz.reddawn.free",
+  "version": "1.0.1",
+  "name": "Red Dawn (Free)",
+  "description": "Free ad-supported live TV channels from Pluto TV — no account needed.",
+  "logo": "https://images.pluto.tv/assets/images/default/vodlanding.jpg",
+  "resources": ["catalog", "meta", "stream"],
+  "types": ["tv"],
+  "idPrefixes": ["reddawn_pluto_"],
+  "catalogs": [
+    {
+      "type": "tv",
+      "id": "pluto_featured",
+      "name": "Red Dawn – Pluto TV Channels",
+      "extra": [
+        { "name": "genre", "isRequired": false },
+        { "name": "skip", "isRequired": false }
+      ]
+    },
+    {
+      "type": "tv",
+      "id": "pluto_search",
+      "name": "Red Dawn – Search",
+      "extra": [
+        { "name": "search", "isRequired": true }
+      ]
+    }
+  ],
+  "behaviorHints": {
+    "adult": false,
+    "p2p": false,
+    "configurable": false
+  }
+}
