@@ -1,0 +1,23 @@
+{
+  "name": "red-dawn-free-addon",
+  "version": "1.0.0",
+  "description": "Stremio addon serving free, ad-supported movies and shows from Pluto TV's public catalog",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
